@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cn.anecansaitin.zoom.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "zoom.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "MouseHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

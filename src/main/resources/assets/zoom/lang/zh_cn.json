@@ -1,0 +1,21 @@
+{
+  "freecamera.modifier.zoom": "Zoom",
+  "gui.free_mode_overlay.mode_on": "自由模式：开启(%s)",
+  "gui.free_mode_overlay.move_mode": "移动模式：%s (%s)",
+  "gui.free_mode_overlay.move_mode.normal": "普通",
+  "gui.free_mode_overlay.move_mode.cross_hair": "准心",
+  "gui.free_mode_overlay.speed": "移动速度：%s (鼠标滚轮)",
+  "gui.free_mode_overlay.fov": "FOV: %s (%s, %s)",
+  "gui.fps_mode_overlay.mode_on": "第一人称+ 模式: 开启(%s)",
+  "gui.fps_mode_overlay.turn_head": "转头 (%s)",
+  "gui.setting_screen.title": "HUD设置菜单",
+  "gui.setting_screen.free_mode_overlay_setting.title": "自由模式HUD偏移设置",
+  "key.categories.zoom": "Zoom视角",
+  "key.zoom.free_mode": "自由模式",
+  "key.zoom.move_mode": "移动模式",
+  "key.zoom.setting": "HUD设置",
+  "key.zoom.fov_up": "提高FOV",
+  "key.zoom.fov_down": "降低FOV",
+  "key.zoom.fps_plus_mode": "第一人称+模式",
+  "key.zoom.turn_head": "转头"
+}
