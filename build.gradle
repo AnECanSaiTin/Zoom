@@ -9,6 +9,18 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 base {
@@ -95,7 +107,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-    implementation files("libs/freecameraapi-neo-1.21.0-2.0.0.jar")
+    api "maven.modrinth:free-camera-api:neo-1.21-2.0.0"
+//    implementation files("libs/freecameraapi-neo-1.21.0-2.0.0.jar")
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
