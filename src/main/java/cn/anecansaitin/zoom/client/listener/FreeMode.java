@@ -3,7 +3,6 @@ package cn.anecansaitin.zoom.client.listener;
 import cn.anecansaitin.freecameraapi.CameraModifierManager;
 import cn.anecansaitin.freecameraapi.ICameraModifier;
 import cn.anecansaitin.zoom.Zoom;
-import cn.anecansaitin.zoom.client.ZoomKeyMapping;
 import cn.anecansaitin.zoom.client.event.MouseMoveEvent;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.KeyMapping;
@@ -27,7 +26,7 @@ import org.joml.Vector3f;
 public class FreeMode {
     public static boolean ENABLED;
     public static boolean MOVE_MODE;
-    public static float FOV = 70;
+    private static float fov = 70;
     private static final Vector3f pos = new Vector3f(0, 3, 0);
     private static final Vector3f rot = new Vector3f();
     public static float SPEED = 0.2f;
@@ -47,12 +46,9 @@ public class FreeMode {
             return;
         }
 
-        if (ZoomKeyMapping.FOV_UP.get().isDown() != ZoomKeyMapping.FOV_DOWN.get().isDown()) {
-            FOV = Mth.clamp(FOV += ZoomKeyMapping.FOV_UP.get().isDown() ? 1 : -1, 30, 110);
-        }
-
+        fov = Mth.clamp(fov, 30, 110);
         modifier.setRotationYXZ(rot)
-                .setFov(FOV);
+                .setFov(fov);
         Vector3f move = new Vector3f();
 
         if (forward != back) {
@@ -128,7 +124,8 @@ public class FreeMode {
                 modifier.enable()
                         .enableRotation()
                         .enablePos()
-                        .enableFov();
+                        .enableFov()
+                        .enableLerp();
                 typeCache = options.getCameraType();
                 options.setCameraType(CameraType.THIRD_PERSON_BACK);
             }
@@ -151,7 +148,7 @@ public class FreeMode {
             jump = false;
             shift = false;
             MOVE_MODE = false;
-            FOV = 70;
+            fov = 70;
         }
     }
 
@@ -197,5 +194,21 @@ public class FreeMode {
         while (key.consumeClick()) {
         }
         key.setDown(true);
+    }
+
+    public static void adjustZRot(boolean anticlockwise) {
+        rot.z += anticlockwise ? -1 : 1;
+    }
+
+    public static float getZRot() {
+        return rot.z;
+    }
+
+    public static void adjustFOV(boolean up) {
+        fov += up ? 1 : -1;
+    }
+
+    public static float getFov() {
+        return fov;
     }
 }

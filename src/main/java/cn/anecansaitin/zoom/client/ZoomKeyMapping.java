@@ -11,6 +11,9 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EventBusSubscriber(modid = Zoom.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ZoomKeyMapping {
     public static final Lazy<KeyMapping> FREE_MODE = Lazy.of(() ->
@@ -76,6 +79,24 @@ public class ZoomKeyMapping {
                     "key.categories." + Zoom.MODID
             ));
 
+    public static final Lazy<KeyMapping> Z_ROT_ANTICLOCKWISE = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".z_rot_anticlockwise",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
+    public static final Lazy<KeyMapping> Z_ROT_CLOCKWISE = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".z_rot_clockwise",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
     @SubscribeEvent
     public static void register(RegisterKeyMappingsEvent event) {
         event.register(FREE_MODE.get());
@@ -85,5 +106,7 @@ public class ZoomKeyMapping {
         event.register(FOV_DOWN.get());
         event.register(FPS_PLUS_MODE.get());
         event.register(TURN_HEAD.get());
+        event.register(Z_ROT_ANTICLOCKWISE.get());
+        event.register(Z_ROT_CLOCKWISE.get());
     }
 }
