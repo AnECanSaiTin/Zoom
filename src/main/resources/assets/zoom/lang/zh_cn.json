@@ -19,5 +19,7 @@
   "key.zoom.fov_up": "提高FOV",
   "key.zoom.fov_down": "降低FOV",
   "key.zoom.fps_plus_mode": "第一人称+模式",
-  "key.zoom.turn_head": "转头"
+  "key.zoom.turn_head": "转头",
+  "key.zoom.z_rot_anticlockwise": "逆时针滚筒旋转",
+  "key.zoom.z_rot_clockwise": "顺时针滚筒旋转"
 }

@@ -19,5 +19,7 @@
   "key.zoom.fov_up": "FOV Up",
   "key.zoom.fov_down": "FOV Down",
   "key.zoom.fps_plus_mode": "FPS Plus Mode",
-  "key.zoom.turn_head": "Turn Head"
+  "key.zoom.turn_head": "Turn Head",
+  "key.zoom.z_rot_anticlockwise": "Z Rot Anti-Clockwise",
+  "key.zoom.z_rot_clockwise": "Z Rot Clockwise"
 }
