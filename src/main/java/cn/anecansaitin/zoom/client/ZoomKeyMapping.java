@@ -97,6 +97,42 @@ public class ZoomKeyMapping {
                     "key.categories." + Zoom.MODID
             ));
 
+    public static final Lazy<KeyMapping> MEMORY = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".memory",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
+    public static final Lazy<KeyMapping> SHORTCUT_1 = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".shortcut_1",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
+    public static final Lazy<KeyMapping> SHORTCUT_2 = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".shortcut_2",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
+    public static final Lazy<KeyMapping> SHORTCUT_3 = Lazy.of(() ->
+            new KeyMapping(
+                    "key." + Zoom.MODID + ".shortcut_3",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_UNKNOWN,
+                    "key.categories." + Zoom.MODID
+            ));
+
     @SubscribeEvent
     public static void register(RegisterKeyMappingsEvent event) {
         event.register(FREE_MODE.get());
@@ -108,5 +144,9 @@ public class ZoomKeyMapping {
         event.register(TURN_HEAD.get());
         event.register(Z_ROT_ANTICLOCKWISE.get());
         event.register(Z_ROT_CLOCKWISE.get());
+        event.register(MEMORY.get());
+        event.register(SHORTCUT_1.get());
+        event.register(SHORTCUT_2.get());
+        event.register(SHORTCUT_3.get());
     }
 }

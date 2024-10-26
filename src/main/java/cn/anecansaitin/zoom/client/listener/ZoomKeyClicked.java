@@ -1,12 +1,15 @@
 package cn.anecansaitin.zoom.client.listener;
 
 import cn.anecansaitin.zoom.Zoom;
+import cn.anecansaitin.zoom.client.ZoomClientConfig;
+import cn.anecansaitin.zoom.client.ZoomKeyMapping;
 import cn.anecansaitin.zoom.client.gui.screen.ZoomSettingScreen;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import org.joml.Vector3f;
 
 import static cn.anecansaitin.zoom.client.ZoomKeyMapping.*;
 
@@ -68,6 +71,36 @@ public class ZoomKeyClicked {
                 FreeMode.adjustFOV(false);
             }
         }
+
+        if (MEMORY.get().isDown()) {
+            if (mode == Mode.FPS_PLUS) {
+                if (SHORTCUT_1.get().isDown()) {
+                    Vector3f rot = FirstPersonPlus.getRot();
+                    ZoomClientConfig.setFpsPlusShortcut(1, rot.x, rot.y, rot.z);
+                    ZoomClientConfig.save();
+                } else if (SHORTCUT_2.get().isDown()) {
+                    Vector3f rot = FirstPersonPlus.getRot();
+                    ZoomClientConfig.setFpsPlusShortcut(2, rot.x, rot.y, rot.z);
+                    ZoomClientConfig.save();
+                } else if (SHORTCUT_3.get().isDown()) {
+                    Vector3f rot = FirstPersonPlus.getRot();
+                    ZoomClientConfig.setFpsPlusShortcut(3, rot.x, rot.y, rot.z);
+                    ZoomClientConfig.save();
+                }
+            }
+        } else {
+            if (mode == Mode.FPS_PLUS) {
+                if (ZoomKeyMapping.SHORTCUT_1.get().isDown()) {
+                    FirstPersonPlus.setShortcutIndex((byte) 1);
+                } else if (ZoomKeyMapping.SHORTCUT_2.get().isDown()) {
+                    FirstPersonPlus.setShortcutIndex((byte) 2);
+                } else if (ZoomKeyMapping.SHORTCUT_3.get().isDown()) {
+                    FirstPersonPlus.setShortcutIndex((byte) 3);
+                } else {
+                    FirstPersonPlus.setShortcutIndex((byte) 0);
+                }
+            }
+        }
     }
 
     private static void switchMode(Mode mode) {
@@ -82,7 +115,9 @@ public class ZoomKeyClicked {
     }
 
     private enum Mode {
-        NONE(() -> {}, () -> {}),
+        NONE(() -> {
+        }, () -> {
+        }),
         FREE(() -> FreeMode.ENABLED = true, () -> FreeMode.ENABLED = false),
         FPS_PLUS(() -> FirstPersonPlus.ENABLED = true, () -> FirstPersonPlus.ENABLED = false);
 

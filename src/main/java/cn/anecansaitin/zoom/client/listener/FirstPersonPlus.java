@@ -24,6 +24,10 @@ public class FirstPersonPlus {
     private static float fov = 70;
     private static boolean enabledO;
     private static boolean turnHeadO;
+    private static final Vector3f shortcut1 = new Vector3f();
+    private static final Vector3f shortcut2 = new Vector3f();
+    private static final Vector3f shortcut3 = new Vector3f();
+    private static byte shortcutIndex;
     private static final ICameraModifier modifier = CameraModifierManager.createModifier(Zoom.MODID, false);
 
     @SubscribeEvent
@@ -52,15 +56,22 @@ public class FirstPersonPlus {
             Vec3 position = player.getPosition(partialTick);
             pos.set(eyePosition.x - position.x, eyePosition.y - position.y, eyePosition.z - position.z);
 
-            if (ZoomKeyMapping.TURN_HEAD.get().isDown()) {
+            if (ZoomKeyMapping.TURN_HEAD.get().isDown() || shortcutIndex > 0) {
                 //转头
                 if (!turnHeadO) {
                     modifier.enableFirstPersonArmFixed();
                     turnHeadO = true;
                 }
 
-                rot.add((float) event.getX() * 0.15F, (float) event.getY() * 0.15F, 0);
-                event.setCanceled(true);
+                switch (shortcutIndex) {
+                    case 1 -> rot.set(shortcut1);
+                    case 2 -> rot.set(shortcut2);
+                    case 3 -> rot.set(shortcut3);
+                    default -> {
+                        rot.add((float) event.getX() * 0.15F, (float) event.getY() * 0.15F, 0);
+                        event.setCanceled(true);
+                    }
+                }
             } else {
                 if (turnHeadO) {
                     modifier.disableFirstPersonArmFixed();
@@ -107,11 +118,31 @@ public class FirstPersonPlus {
         return rot.z;
     }
 
+    public static void setRot(float x, float y, float z) {
+        rot.set(x, y, z);
+    }
+
+    public static Vector3f getRot() {
+        return rot;
+    }
+
     public static void adjustFOV(boolean up) {
         fov += up ? 1 : -1;
     }
 
     public static float getFov() {
         return fov;
+    }
+
+    public static void setShortcut(int index, float x, float y, float z) {
+        switch (index) {
+            case 1 -> shortcut1.set(x, y, z);
+            case 2 -> shortcut2.set(x, y, z);
+            case 3 -> shortcut3.set(x, y, z);
+        }
+    }
+
+    public static void setShortcutIndex(byte index) {
+        shortcutIndex = index;
     }
 }
