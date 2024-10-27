@@ -11,9 +11,6 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EventBusSubscriber(modid = Zoom.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ZoomKeyMapping {
     public static final Lazy<KeyMapping> FREE_MODE = Lazy.of(() ->

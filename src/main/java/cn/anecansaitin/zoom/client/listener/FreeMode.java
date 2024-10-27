@@ -8,9 +8,10 @@ import net.minecraft.client.CameraType;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -154,20 +155,20 @@ public class FreeMode {
 
     @SubscribeEvent
     public static void movementInputUpdate(MovementInputUpdateEvent event) {
-        Input input = event.getInput();
+        ClientInput clientInput = event.getInput();
+        Input input = clientInput.keyPresses;
 
         if (ENABLED) {
-            FreeMode.forward = input.up;
-            FreeMode.back = input.down;
-            FreeMode.left = input.left;
-            FreeMode.right = input.right;
-            FreeMode.jump = input.jumping;
-            FreeMode.shift = input.shiftKeyDown;
+            FreeMode.forward = input.forward();
+            FreeMode.back = input.backward();
+            FreeMode.left = input.left();
+            FreeMode.right = input.right();
+            FreeMode.jump = input.jump();
+            FreeMode.shift = input.shift();
 
-            input.forwardImpulse = 0;
-            input.leftImpulse = 0;
-            input.jumping = false;
-            input.shiftKeyDown = false;
+            clientInput.forwardImpulse = 0;
+            clientInput.leftImpulse = 0;
+            clientInput.keyPresses = Input.EMPTY;
         }
     }
 
